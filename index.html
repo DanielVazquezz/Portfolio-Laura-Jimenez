@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light only">
+<title>Laura Jiménez Marmolejo — Psicóloga Infantil</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══ VARIABLES ═══ */
+:root{
+  --pink-50:#fff5f7;--pink-100:#ffe0e8;--pink-200:#ffc2d4;
+  --pink-300:#ffa3bf;--pink-400:#f47fa0;--pink-500:#e8607e;--pink-600:#d44a6a;
+  --sage-50:#f4f8f1;--sage-100:#dce8d4;--sage-200:#b8d4a6;--sage-300:#8fb87a;--sage-400:#6a9a56;
+  --peach-50:#fff8f0;--peach-100:#ffe8d0;--peach-200:#ffd4a8;
+  --lavender-50:#f6f0ff;--lavender-100:#e8d8ff;
+  --cream:#fffcf9;--text-dark:#3d2e33;--text-mid:#6b5560;
+  --text-light:#9a8690;--border:#f0e4e8;
+  --shadow:0 4px 24px rgba(244,127,160,.08);
+}
+
+/* ═══ RESET ═══ */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;color-scheme:light}
+body{background:var(--cream);color:var(--text-dark);font-family:'Nunito',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden}
+::selection{background:var(--pink-200);color:var(--text-dark)}
+
+/* Force light mode everywhere */
+@media(prefers-color-scheme:dark){
+  :root{color-scheme:light}
+  body,html{background:var(--cream)!important;color:var(--text-dark)!important}
+  nav{background:rgba(255,252,249,.88)!important}
+  .edu-card,.service-card,.training-item,.contact-method,.skill-bubble,.visual-float,.hero-highlights,.fab-email,.fab-cv{background:#fff!important;color:var(--text-dark)!important}
+  #about,#contact{background:#fff!important}
+  .mobile-menu{background:rgba(255,252,249,.97)!important}
+  .mobile-menu a{color:var(--text-dark)!important}
+  input,textarea,button{background:#fff;color:var(--text-dark)}
+}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;width:100%;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:100;backdrop-filter:blur(20px);background:rgba(255,252,249,.88);border-bottom:1px solid var(--border)}
+.logo{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:500;color:var(--text-dark);text-decoration:none;display:flex;align-items:center;gap:.4rem;flex-shrink:0}
+.logo-heart{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--pink-100);border-radius:50%;font-size:.8rem;transition:transform .3s}
+.logo:hover .logo-heart{transform:scale(1.15) rotate(-10deg)}
+.nav-links{display:flex;gap:1.6rem;list-style:none}
+.nav-links a{color:var(--text-mid);text-decoration:none;font-size:.82rem;font-weight:600;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--pink-400);border-radius:2px;transition:width .3s}
+.nav-links a:hover{color:var(--pink-500)}
+.nav-links a:hover::after{width:100%}
+.lang-toggle{display:flex;align-items:center;gap:.35rem;padding:.4rem .85rem;background:#fff;border:1.5px solid var(--border);border-radius:100px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:600;color:var(--text-mid);transition:all .3s;flex-shrink:0}
+.lang-toggle:hover{border-color:var(--pink-300);color:var(--pink-500)}
+.lang-flag{font-size:.9rem;line-height:1}
+
+/* Hamburger button */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:.4rem;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text-dark);border-radius:2px;transition:all .3s;margin:5px 0}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* Mobile menu overlay */
+.mobile-menu{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,252,249,.97);backdrop-filter:blur(20px);z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:500;color:var(--text-dark);text-decoration:none;transition:color .3s;opacity:0;transform:translateY(15px);transition:all .4s}
+.mobile-menu.open a{opacity:1;transform:translateY(0)}
+.mobile-menu.open a:nth-child(1){transition-delay:.05s}
+.mobile-menu.open a:nth-child(2){transition-delay:.1s}
+.mobile-menu.open a:nth-child(3){transition-delay:.15s}
+.mobile-menu.open a:nth-child(4){transition-delay:.2s}
+.mobile-menu.open a:nth-child(5){transition-delay:.25s}
+.mobile-menu a:hover{color:var(--pink-500)}
+
+/* ═══ FLOATING ACTION BUTTONS ═══ */
+.fab-container{position:fixed;right:1.2rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.6rem;z-index:99}
+.fab-btn{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .3s;box-shadow:0 3px 14px rgba(0,0,0,.1);border:1.5px solid transparent;position:relative}
+.fab-btn:hover{transform:scale(1.12);box-shadow:0 5px 20px rgba(0,0,0,.15)}
+.fab-btn svg{width:19px;height:19px;fill:currentColor}
+.fab-linkedin{background:#0A66C2;color:#fff}
+.fab-email{background:#fff;color:var(--pink-500);border-color:var(--border)}
+.fab-email:hover{border-color:var(--pink-300)}
+.fab-cv{background:#fff;color:var(--text-mid);border-color:var(--border)}
+.fab-cv:hover{border-color:var(--pink-300);color:var(--pink-500)}
+.fab-btn::before{content:attr(data-tooltip);position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);background:var(--text-dark);color:#fff;padding:.3rem .65rem;border-radius:8px;font-family:'Nunito',sans-serif;font-size:.7rem;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s}
+.fab-btn:hover::before{opacity:1}
+
+/* ═══ BLOBS ═══ */
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;pointer-events:none;z-index:0}
+
+/* ═══ HERO ═══ */
+.hero{display:flex;align-items:center;padding:9rem 2rem 2.5rem;position:relative}
+.hero .blob-1{width:420px;height:420px;top:-100px;right:-80px;background:var(--pink-200)}
+.hero .blob-2{width:260px;height:260px;bottom:20px;left:-40px;background:var(--sage-200)}
+.hero-inner{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--pink-100);color:var(--pink-600);padding:.4rem 1rem;border-radius:100px;font-size:.78rem;font-weight:600;margin-bottom:1.2rem;opacity:0;animation:fadeUp .7s .2s forwards}
+.hero-badge-dot{width:6px;height:6px;background:var(--pink-400);border-radius:50%;animation:pulse 2s infinite}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.6rem);line-height:1.15;font-weight:500;letter-spacing:-.02em;opacity:0;animation:fadeUp .7s .35s forwards}
+.hero h1 .highlight{color:var(--pink-500);font-style:italic;position:relative}
+.hero h1 .highlight::after{content:'';position:absolute;bottom:2px;left:0;width:100%;height:7px;background:var(--pink-100);border-radius:4px;z-index:-1}
+.hero-text{font-size:1.02rem;color:var(--text-mid);margin-top:1.2rem;max-width:540px;line-height:1.8;opacity:0;animation:fadeUp .7s .5s forwards}
+.hero-cta{display:flex;gap:.8rem;margin-top:1.8rem;justify-content:center;opacity:0;animation:fadeUp .7s .65s forwards;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:.4rem;padding:.8rem 1.6rem;background:var(--pink-400);color:#fff;text-decoration:none;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:600;border:none;border-radius:100px;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(244,127,160,.3)}
+.btn-primary:hover{background:var(--pink-500);transform:translateY(-2px);box-shadow:0 6px 24px rgba(244,127,160,.4)}
+.btn-secondary{display:inline-flex;align-items:center;gap:.4rem;padding:.8rem 1.6rem;background:#fff;color:var(--text-dark);text-decoration:none;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:600;border:1.5px solid var(--border);border-radius:100px;cursor:pointer;transition:all .3s}
+.btn-secondary:hover{border-color:var(--pink-300);background:var(--pink-50);transform:translateY(-2px)}
+
+/* Hero highlights */
+.hero-highlights{display:inline-flex;align-items:center;margin-top:2.5rem;opacity:0;animation:fadeUp .7s .85s forwards;background:#fff;border-radius:14px;padding:1.2rem .5rem;box-shadow:0 2px 16px rgba(244,127,160,.08);border:1.5px solid var(--border)}
+.hero-highlight-item{display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:0 1.6rem}
+.hero-highlight-value{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;color:var(--pink-500);line-height:1.2;white-space:nowrap}
+.hero-highlight-label{font-size:.67rem;font-weight:600;color:var(--text-light);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.hero-highlight-divider{width:1.5px;height:34px;background:var(--border);flex-shrink:0}
+
+/* ═══ VISUAL (clouds) ═══ */
+.visual-section{padding:1rem 2rem 4rem;display:flex;justify-content:center;position:relative}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center;height:400px;width:720px;max-width:100%;opacity:0;animation:fadeIn 1s .3s forwards}
+.visual-circle-main{width:220px;height:220px;border-radius:50%;background:linear-gradient(135deg,var(--pink-100),var(--peach-100) 50%,var(--lavender-50));position:relative;display:flex;align-items:center;justify-content:center;animation:floatGentle 6s ease-in-out infinite;flex-shrink:0}
+.visual-circle-main::before{content:'';position:absolute;inset:-14px;border-radius:50%;border:2px dashed var(--pink-200);animation:rotateSlow 25s linear infinite}
+.visual-emoji{font-size:4.2rem;line-height:1}
+.visual-float{position:absolute;background:#fff;border-radius:14px;padding:.55rem .95rem;box-shadow:0 2px 14px rgba(244,127,160,.1);font-size:.82rem;font-weight:600;color:var(--text-dark);display:flex;align-items:center;gap:.4rem;border:1.5px solid var(--border);white-space:nowrap}
+.float-icon{width:27px;height:27px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0}
+.float-icon.pink{background:var(--pink-100)}
+.float-icon.sage{background:var(--sage-100)}
+.float-icon.peach{background:var(--peach-100)}
+.float-1{top:35px;left:0;animation:floatGentle 4.2s ease-in-out infinite}
+.float-2{top:50%;left:15px;transform:translateY(-50%);animation:floatLR 4.8s ease-in-out .6s infinite}
+.float-3{bottom:35px;left:0;animation:floatGentle 5s ease-in-out 1.2s infinite}
+.float-4{top:35px;right:0;animation:floatGentle 4.5s ease-in-out .3s infinite}
+.float-5{top:50%;right:15px;transform:translateY(-50%);animation:floatLR 5.2s ease-in-out .9s infinite}
+.float-6{bottom:35px;right:0;animation:floatGentle 4.3s ease-in-out 1.5s infinite}
+
+/* ═══ COMMON ═══ */
+section{padding:5rem 2rem;position:relative}
+.container{max-width:1100px;margin:0 auto}
+.section-eyebrow{display:inline-flex;align-items:center;gap:.4rem;font-size:.74rem;font-weight:700;color:var(--pink-500);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.7rem}
+.section-eyebrow::before{content:'';width:18px;height:2px;background:var(--pink-300);border-radius:2px}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,4vw,2.7rem);font-weight:500;line-height:1.2;letter-spacing:-.02em;margin-bottom:.7rem}
+.section-subtitle{font-size:.98rem;color:var(--text-mid);max-width:500px;line-height:1.8;margin-bottom:2.5rem}
+
+/* ═══ ABOUT ═══ */
+#about{background:#fff}
+.about-content{max-width:680px;margin:0 auto}
+.about-text p{color:var(--text-mid);margin-bottom:1rem;line-height:1.85;font-size:.94rem}
+.about-text p strong{color:var(--text-dark);font-weight:600}
+.about-highlight{background:var(--pink-50);border-left:3px solid var(--pink-300);border-radius:0 12px 12px 0;padding:1rem 1.2rem;margin-top:1.2rem;font-style:italic;color:var(--text-mid);font-size:.9rem;line-height:1.7}
+
+/* ═══ EXPERIENCE ═══ */
+.exp-item{display:grid;grid-template-columns:165px 1fr;gap:1.8rem;padding:1.6rem 0;border-bottom:1px solid var(--border);transition:all .3s;position:relative}
+.exp-item:first-child{border-top:1px solid var(--border)}
+.exp-item:hover{padding-left:.8rem}
+.exp-item:hover::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pink-300);border-radius:3px}
+.exp-date{font-size:.76rem;font-weight:600;color:var(--pink-500);padding-top:.1rem}
+.exp-date span{display:block;color:var(--text-light);font-weight:400;font-size:.74rem;margin-top:.1rem}
+.exp-content h3{font-family:'Fraunces',serif;font-size:1.08rem;font-weight:500;margin-bottom:.25rem}
+.exp-content p{color:var(--text-mid);font-size:.86rem;line-height:1.7}
+.exp-tag{display:inline-block;background:var(--pink-50);color:var(--pink-500);padding:.12rem .55rem;border-radius:6px;font-size:.68rem;font-weight:600;margin-top:.4rem}
+
+/* ═══ EDUCATION ═══ */
+.education-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.edu-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.6rem;transition:all .4s;position:relative;overflow:hidden}
+.edu-card:hover{border-color:var(--pink-200);transform:translateY(-3px);box-shadow:var(--shadow)}
+.edu-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;border-radius:16px 16px 0 0;opacity:0;transition:opacity .4s}
+.edu-card:hover::after{opacity:1}
+.edu-card:nth-child(1)::after{background:linear-gradient(90deg,var(--pink-300),var(--pink-400))}
+.edu-card:nth-child(2)::after{background:linear-gradient(90deg,var(--sage-300),var(--sage-400))}
+.edu-card:nth-child(3)::after{background:linear-gradient(90deg,var(--peach-200),var(--pink-300))}
+.edu-years{display:inline-block;background:var(--pink-50);color:var(--pink-500);padding:.2rem .6rem;border-radius:6px;font-size:.72rem;font-weight:700;margin-bottom:.7rem}
+.edu-card:nth-child(2) .edu-years{background:var(--sage-50);color:var(--sage-400)}
+.edu-card:nth-child(3) .edu-years{background:var(--peach-50);color:var(--pink-500)}
+.edu-card h3{font-family:'Fraunces',serif;font-size:1.08rem;font-weight:500;margin-bottom:.15rem}
+.edu-school{color:var(--text-light);font-size:.82rem;font-weight:500}
+.edu-icon{position:absolute;top:1.2rem;right:1.2rem;font-size:1.5rem;opacity:.15}
+
+/* ═══ TRAINING ═══ */
+.training-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem}
+.training-item{background:#fff;border:1.5px solid var(--border);border-radius:13px;padding:1rem 1.2rem;display:flex;align-items:flex-start;gap:.7rem;transition:all .3s}
+.training-item:hover{border-color:var(--pink-200);transform:translateY(-2px);box-shadow:var(--shadow)}
+.training-icon{width:30px;height:30px;border-radius:8px;background:var(--pink-100);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;margin-top:.1rem}
+.training-item:nth-child(2) .training-icon{background:var(--sage-100)}
+.training-item:nth-child(3) .training-icon{background:var(--peach-100)}
+.training-item:nth-child(4) .training-icon{background:var(--lavender-100)}
+.training-item:nth-child(5) .training-icon{background:var(--pink-100)}
+.training-item:nth-child(6) .training-icon{background:var(--sage-100)}
+.training-item:nth-child(7) .training-icon{background:var(--peach-100)}
+.training-text{font-size:.85rem;color:var(--text-dark);font-weight:500;line-height:1.5}
+
+/* ═══ SERVICES ═══ */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.service-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.8rem;transition:all .4s}
+.service-card:hover{border-color:var(--pink-200);transform:translateY(-4px);box-shadow:var(--shadow)}
+.service-emoji{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem}
+.service-card:nth-child(1) .service-emoji{background:var(--pink-100)}
+.service-card:nth-child(2) .service-emoji{background:var(--sage-100)}
+.service-card:nth-child(3) .service-emoji{background:var(--peach-100)}
+.service-card:nth-child(4) .service-emoji{background:var(--lavender-100)}
+.service-card:nth-child(5) .service-emoji{background:var(--pink-100)}
+.service-card:nth-child(6) .service-emoji{background:var(--sage-100)}
+.service-card h3{font-family:'Fraunces',serif;font-size:1.08rem;font-weight:500;margin-bottom:.4rem}
+.service-card p{color:var(--text-mid);font-size:.86rem;line-height:1.7}
+
+/* ═══ SKILLS ═══ */
+#skills{background:linear-gradient(180deg,var(--pink-50),var(--cream))}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:.6rem;max-width:650px}
+.skill-bubble{background:#fff;border:1.5px solid var(--border);border-radius:100px;padding:.5rem 1.2rem;font-size:.86rem;font-weight:500;color:var(--text-dark);transition:all .3s;cursor:default}
+.skill-bubble:hover{border-color:var(--pink-300);background:var(--pink-50);transform:translateY(-2px);box-shadow:0 4px 12px rgba(244,127,160,.12)}
+
+/* ═══ CONTACT ═══ */
+#contact{background:#fff}
+.contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:start}
+.contact-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,4vw,2.7rem);font-weight:500;line-height:1.2;margin-bottom:1rem}
+.contact-title .highlight{color:var(--pink-500);font-style:italic}
+.contact-desc{color:var(--text-mid);font-size:.95rem;line-height:1.8;margin-bottom:1.8rem;max-width:400px}
+.contact-methods{display:flex;flex-direction:column;gap:.7rem}
+.contact-method{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.1rem;background:var(--pink-50);border-radius:13px;text-decoration:none;color:var(--text-dark);font-weight:500;transition:all .3s;border:1.5px solid transparent}
+.contact-method:hover{border-color:var(--pink-200);background:#fff;transform:translateX(5px);box-shadow:var(--shadow)}
+.contact-method-icon{width:38px;height:38px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.contact-method:hover .contact-method-icon{background:var(--pink-100)}
+.contact-method-label{font-size:.66rem;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.08em}
+.contact-method-value{font-size:.86rem;color:var(--text-dark);word-break:break-all}
+.contact-warmth{background:linear-gradient(135deg,var(--pink-50),var(--peach-50),var(--lavender-50));border-radius:20px;padding:2rem;position:relative;overflow:hidden}
+.contact-warmth::before{content:'';position:absolute;width:120px;height:120px;background:var(--pink-100);border-radius:50%;top:-30px;right:-30px;opacity:.5}
+.warmth-emoji{font-size:2.3rem;margin-bottom:.8rem}
+.warmth-title{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:500;margin-bottom:.5rem;position:relative;z-index:1}
+.warmth-text{color:var(--text-mid);font-size:.88rem;line-height:1.8;position:relative;z-index:1}
+.warmth-checklist{list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:.5rem;position:relative;z-index:1}
+.warmth-checklist li{display:flex;align-items:center;gap:.5rem;font-size:.84rem;font-weight:500;color:var(--text-dark)}
+.warmth-check{width:22px;height:22px;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:.68rem;color:var(--sage-400);flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+
+/* ═══ FOOTER ═══ */
+footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
+.footer-copy,.footer-made{font-size:.76rem;color:var(--text-light);display:flex;align-items:center;gap:.3rem}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes floatGentle{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatLR{0%,100%{transform:translateY(-50%) translateX(0)}50%{transform:translateY(-50%) translateX(-7px)}}
+@keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.reveal{opacity:0;transform:translateY(25px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.stagger-children .reveal:nth-child(1){transition-delay:0s}
+.stagger-children .reveal:nth-child(2){transition-delay:.07s}
+.stagger-children .reveal:nth-child(3){transition-delay:.14s}
+.stagger-children .reveal:nth-child(4){transition-delay:.21s}
+.stagger-children .reveal:nth-child(5){transition-delay:.28s}
+.stagger-children .reveal:nth-child(6){transition-delay:.35s}
+.stagger-children .reveal:nth-child(7){transition-delay:.42s}
+.stagger-children .reveal:nth-child(8){transition-delay:.49s}
+.stagger-children .reveal:nth-child(9){transition-delay:.56s}
+.stagger-children .reveal:nth-child(10){transition-delay:.63s}
+
+/* ═══ TABLET ═══ */
+@media(max-width:1024px){
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .education-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-grid{grid-template-columns:1fr}
+  .hero-visual{width:100%;height:340px}
+  .visual-circle-main{width:180px;height:180px}
+  .visual-emoji{font-size:3.2rem}
+  .hero-highlight-item{padding:0 1.2rem}
+}
+
+/* ═══ MOBILE ═══ */
+@media(max-width:768px){
+  html,body{overflow-x:hidden}
+  .visual-section,.hero-visual{overflow-x:hidden}
+  .hero-visual{overflow:hidden}
+
+  nav{padding:.7rem 1rem}
+  .nav-links{display:none}
+  .hamburger{display:block}
+  .logo{font-size:1rem}
+  .lang-toggle .lang-label{display:none}
+  .lang-toggle{padding:.35rem .55rem}
+
+  .fab-container{right:.5rem;gap:.45rem}
+  .fab-btn{width:36px;height:36px}
+  .fab-btn svg{width:15px;height:15px}
+  .fab-btn::before{display:none}
+
+  .hero{padding:5.5rem 1.2rem 1.5rem}
+  .hero h1{font-size:1.65rem;padding-right:2.5rem}
+  .hero-text{font-size:.88rem;margin-top:.8rem;padding:0 .3rem}
+  .hero-cta{margin-top:1.3rem;gap:.5rem}
+  .btn-primary,.btn-secondary{padding:.7rem 1.3rem;font-size:.82rem}
+  .hero-highlights{margin-top:1.5rem;padding:.9rem .3rem}
+  .hero-highlight-item{padding:0 .7rem}
+  .hero-highlight-value{font-size:.88rem}
+  .hero-highlight-label{font-size:.55rem}
+  .hero-highlight-divider{height:26px}
+
+  .visual-section{padding:.3rem .5rem 1.5rem}
+  .hero-visual{height:240px}
+  .visual-circle-main{width:110px;height:110px}
+  .visual-circle-main::before{inset:-8px;border-width:1.5px}
+  .visual-emoji{font-size:2rem}
+  .visual-float{font-size:.65rem;padding:.3rem .55rem;border-radius:9px;gap:.25rem}
+  .float-icon{width:19px;height:19px;font-size:.68rem;border-radius:5px}
+  .float-1{top:5px;left:0}
+  .float-2{left:0}
+  .float-3{bottom:5px;left:0}
+  .float-4{top:5px;right:0}
+  .float-5{right:0}
+  .float-6{bottom:5px;right:0}
+
+  section{padding:3rem 1.2rem}
+  .section-title{font-size:1.45rem}
+  .section-subtitle{font-size:.86rem;margin-bottom:1.8rem}
+  .about-text p{font-size:.88rem}
+  .about-highlight{padding:.8rem .9rem;font-size:.84rem}
+
+  .exp-item{grid-template-columns:1fr;gap:.15rem;padding:1.2rem 0}
+  .exp-item:hover{padding-left:0}
+  .exp-item:hover::before{display:none}
+  .exp-date{font-size:.72rem}
+  .exp-content h3{font-size:.98rem}
+  .exp-content p{font-size:.82rem}
+
+  .education-grid{grid-template-columns:1fr;gap:.8rem}
+  .edu-card{padding:1.3rem}
+  .edu-card h3{font-size:1rem}
+
+  .training-grid{grid-template-columns:1fr}
+  .training-item{padding:.9rem 1rem}
+  .training-text{font-size:.82rem}
+
+  .services-grid{grid-template-columns:1fr}
+  .service-card{padding:1.4rem}
+  .service-card h3{font-size:1rem}
+  .service-card p{font-size:.82rem}
+
+  .skills-wrap{gap:.4rem}
+  .skill-bubble{padding:.4rem .9rem;font-size:.8rem}
+
+  .contact-grid{gap:1.5rem}
+  .contact-desc{font-size:.86rem}
+  .contact-method-value{font-size:.8rem}
+  .contact-warmth{padding:1.5rem}
+  .warmth-title{font-size:1.08rem}
+  .warmth-text{font-size:.82rem}
+  .warmth-checklist li{font-size:.8rem}
+
+
+  /* Mobile fixes: avoid overflow + improve hero layout */
+  .hero-highlights{width:100%;max-width:100%;display:flex;flex-wrap:wrap;justify-content:center;gap:.55rem 1rem;padding:.9rem .9rem}
+  .hero-highlight-item{flex:1 1 120px;padding:.2rem .6rem}
+  .hero-highlight-divider{display:none}
+
+  .hero-visual{height:280px}
+  .visual-circle-main{width:140px;height:140px}
+
+  .visual-float{max-width:calc(100vw - 3rem)}
+  .float-1{left:12px}
+  .float-2{left:12px}
+  .float-3{left:12px}
+  .float-4{right:12px}
+  .float-5{right:12px}
+  .float-6{right:12px}
+  .float-2,.float-5{animation:none}
+
+  footer{flex-direction:column;text-align:center;padding:1.3rem 1rem}
+}
+
+/* ═══ SMALL MOBILE ═══ */
+@media(max-width:400px){
+  .hero h1{font-size:1.45rem}
+  .hero-highlights{flex-direction:column;gap:.5rem;padding:.7rem 1rem;align-items:center}
+  .hero-highlight-divider{width:50px;height:1.5px}
+  .hero-highlight-item{padding:.15rem 0}
+  .hero-visual{height:200px}
+  .visual-circle-main{width:90px;height:90px}
+  .visual-emoji{font-size:1.7rem}
+  .visual-float{font-size:.58rem;padding:.25rem .4rem}
+  .float-icon{width:16px;height:16px;font-size:.58rem}
+  /* Small mobile: keep hero image readable */
+  .hero-visual{height:240px}
+  .visual-circle-main{width:120px;height:120px}
+
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo"><span class="logo-heart">🧠</span>Laura Jiménez</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav.about">Sobre mí</a></li>
+    <li><a href="#experience" data-i18n="nav.experience">Experiencia</a></li>
+    <li><a href="#education" data-i18n="nav.education">Formación</a></li>
+    <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:.5rem">
+    <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
+      <span class="lang-flag">🇬🇧</span>
+      <span class="lang-label" data-i18n="lang.label">English</span>
+    </button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()" data-i18n="nav.about">Sobre mí</a>
+  <a href="#experience" onclick="closeMenu()" data-i18n="nav.experience">Experiencia</a>
+  <a href="#education" onclick="closeMenu()" data-i18n="nav.education">Formación</a>
+  <a href="#services" onclick="closeMenu()" data-i18n="nav.services">Servicios</a>
+  <a href="#contact" onclick="closeMenu()" data-i18n="nav.contact">Contacto</a>
+</div>
+
+<!-- FABs -->
+<div class="fab-container">
+  <a href="https://linkedin.com" target="_blank" class="fab-btn fab-linkedin" data-tooltip="LinkedIn" aria-label="LinkedIn">
+    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+  </a>
+  <a href="mailto:laurajimenezmarmolejo03@gmail.com" class="fab-btn fab-email" data-tooltip="Email" aria-label="Email">
+    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+  </a>
+  <a href="#" class="fab-btn fab-cv" data-tooltip="Ver CV" aria-label="Ver CV">
+    <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zm-3-7H9v-2h6v2zm0 4H9v-2h6v2z"/></svg>
+  </a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="hero-badge-dot"></span><span data-i18n="hero.badge">Psicóloga Infanto-Juvenil</span></div>
+    <h1 data-i18n="hero.title">Acompañando a los más <span class="highlight">pequeños</span> en su camino</h1>
+    <p class="hero-text" data-i18n="hero.text">Soy Laura, psicóloga graduada y en formación especializada en infancia y adolescencia. Creo en una atención cercana, empática y basada en la evidencia, donde cada niño se sienta seguro para crecer.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary" data-i18n="hero.cta1">Contacta conmigo ♥</a>
+      <a href="#about" class="btn-secondary" data-i18n="hero.cta2">Conóceme mejor</a>
+    </div>
+    <div class="hero-highlights">
+      <div class="hero-highlight-item">
+        <span class="hero-highlight-value" data-i18n="h.1v">Psicóloga</span>
+        <span class="hero-highlight-label" data-i18n="h.1l">Universidad de Málaga</span>
+      </div>
+      <div class="hero-highlight-divider"></div>
+      <div class="hero-highlight-item">
+        <span class="hero-highlight-value">MUPGS</span>
+        <span class="hero-highlight-label" data-i18n="h.2l">General Sanitario</span>
+      </div>
+      <div class="hero-highlight-divider"></div>
+      <div class="hero-highlight-item">
+        <span class="hero-highlight-value" data-i18n="h.3v">Especialista</span>
+        <span class="hero-highlight-label" data-i18n="h.3l">Infancia y Adolescencia</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISUAL (clouds) -->
+<div class="visual-section">
+  <div class="hero-visual">
+    <div class="visual-float float-1"><span class="float-icon pink">⚡</span><span data-i18n="c.1">Energía</span></div>
+    <div class="visual-float float-2"><span class="float-icon sage">🤝</span><span data-i18n="c.2">Cercana</span></div>
+    <div class="visual-float float-3"><span class="float-icon peach">💕</span><span data-i18n="c.3">Empatía</span></div>
+    <div class="visual-circle-main"><img src="IMG_9332.jpg" alt="Laura Jiménez Marmolejo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" /></div>
+    <div class="visual-float float-4"><span class="float-icon peach">🫶</span><span data-i18n="c.4">Confianza</span></div>
+    <div class="visual-float float-5"><span class="float-icon pink">⚖️</span><span data-i18n="c.5">Ética</span></div>
+    <div class="visual-float float-6"><span class="float-icon sage">🎓</span><span data-i18n="c.6">Profesionalidad</span></div>
+  </div>
+</div>
+
+<!-- SOBRE MÍ -->
+<section id="about">
+  <div class="container">
+    <div class="about-content reveal">
+      <p class="section-eyebrow" data-i18n="ab.ey">Sobre mí</p>
+      <h2 class="section-title" data-i18n="ab.t">Cada niño merece ser escuchado y comprendido</h2>
+      <div class="about-text">
+        <p data-i18n="ab.p1">Soy <strong>Laura Jiménez Marmolejo</strong>, graduada en Psicología por la <strong>Universidad de Málaga</strong> y actualmente cursando el Máster en Intervención en Psicología de la Infancia y Adolescencia en la <strong>Universidad Loyola</strong>.</p>
+        <p data-i18n="ab.p2">Durante mi formación he tenido la oportunidad de realizar prácticas en campamentos, centros de atención infantil temprana (C.A.I.T.) y centros de psicología. Estas experiencias me enseñaron que <strong>acompañar a los niños desde la cercanía, la empatía y el juego</strong> marca la diferencia.</p>
+        <p data-i18n="ab.p3">Desde 2022 soy voluntaria en <strong>terapia psicológica asistida con perros</strong> en la Asociación Huellas Terapéuticas, una experiencia que me ha permitido ver de primera mano el poder del vínculo animal-niño.</p>
+      </div>
+      <div class="about-highlight" data-i18n="ab.q">"Mi objetivo es ofrecer una atención psicológica integral, basada en la evidencia científica y adaptada a las necesidades de cada paciente."</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section id="experience">
+  <div class="container">
+    <p class="section-eyebrow reveal" data-i18n="ex.ey">Experiencia</p>
+    <h2 class="section-title reveal" data-i18n="ex.t">Aprendiendo en cada paso</h2>
+    <p class="section-subtitle reveal" data-i18n="ex.st">Cada experiencia me ha enseñado algo valioso sobre el trabajo con niños, adolescentes y familias.</p>
+    <div class="experience-list">
+      <div class="exp-item reveal">
+        <div class="exp-date">Sept. 2022 — Actualidad<span>Asociación Huellas Terapéuticas</span></div>
+        <div class="exp-content"><h3 data-i18n="e1.t">Voluntaria en terapia psicológica con perros 🐾</h3><p data-i18n="e1.d">Participación activa en sesiones de terapia asistida con animales, trabajando con niños y adolescentes en un entorno terapéutico único basado en el vínculo humano-animal.</p><span class="exp-tag" data-i18n="e1.g">Voluntariado activo</span></div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-date">Jun. — Ago. 2025<span>Centro de Estudios NEO</span></div>
+        <div class="exp-content"><h3 data-i18n="e2.t">Monitora infanto-juvenil en Campamento de Verano</h3><p data-i18n="e2.d">Organización y dinamización de actividades lúdicas y educativas para niños y adolescentes, fomentando habilidades sociales, autonomía y trabajo en equipo.</p></div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-date">Dic. 2024 — May. 2025<span>C.A.I.T. Lucía Vivar Hidalgo</span></div>
+        <div class="exp-content"><h3 data-i18n="e3.t">Prácticas en Centro de Atención Infantil Temprana</h3><p data-i18n="e3.d">Contrato de prácticas en centro especializado en atención temprana, colaborando en la evaluación e intervención con niños y sus familias.</p><span class="exp-tag" data-i18n="e3.g">Atención Temprana</span></div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-date">Jul. 2024 — Abr. 2025<span>Centro Meraki</span></div>
+        <div class="exp-content"><h3 data-i18n="e4.t">Monitora de Campamento Infantil</h3><p data-i18n="e4.d">Campamento de Verano 2024, Semana Blanca y Semana Santa 2025. Planificación de actividades adaptadas a diferentes edades y necesidades.</p></div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-date">May. — Ago. 2025<span>CC. La Cañada (Marbella)</span></div>
+        <div class="exp-content"><h3 data-i18n="e5.t">Retail Assistant — Primark</h3><p data-i18n="e5.d">Atención al cliente, gestión de inventario y trabajo en equipo en un entorno dinámico y de alto volumen.</p></div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-date">Jun. — Ago. 2024<span>ZARA</span></div>
+        <div class="exp-content"><h3 data-i18n="e6.t">Dependienta</h3><p data-i18n="e6.d">Atención al público y experiencia en retail, fortaleciendo habilidades interpersonales y gestión del tiempo.</p></div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-date">Jun. — Ago. 2023<span>Lancôme &amp; Armani</span></div>
+        <div class="exp-content"><h3 data-i18n="e7.t">Promotora de Cosmética</h3><p data-i18n="e7.d">Promoción de productos premium con atención personalizada al cliente y técnicas de comunicación persuasiva.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMACIÓN -->
+<section id="education">
+  <div class="container">
+    <p class="section-eyebrow reveal" data-i18n="ed.ey">Formación académica</p>
+    <h2 class="section-title reveal" data-i18n="ed.t">Base sólida, compromiso constante</h2>
+    <p class="section-subtitle reveal" data-i18n="ed.st">Una formación rigurosa es la base de una atención de calidad.</p>
+    <div class="education-grid stagger-children">
+      <div class="edu-card reveal"><span class="edu-icon">🎓</span><span class="edu-years">2021 — 2025</span><h3 data-i18n="ed.1">Grado en Psicología</h3><p class="edu-school">Universidad de Málaga</p></div>
+      <div class="edu-card reveal"><span class="edu-icon">📖</span><span class="edu-years">2025 — 2027</span><h3 data-i18n="ed.2">MUPGS</h3><p class="edu-school">Universidad Loyola</p></div>
+      <div class="edu-card reveal"><span class="edu-icon">🧒</span><span class="edu-years">2025 — 2027</span><h3 data-i18n="ed.3">Máster en Intervención en Psicología de la Infancia y Adolescencia</h3><p class="edu-school">Universidad Loyola</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMACIÓN COMPLEMENTARIA -->
+<section id="training" style="background:var(--pink-50)">
+  <div class="container">
+    <p class="section-eyebrow reveal" data-i18n="tr.ey">Formación complementaria</p>
+    <h2 class="section-title reveal" data-i18n="tr.t">Siempre aprendiendo</h2>
+    <p class="section-subtitle reveal" data-i18n="tr.st">Cursos, talleres y actividades que enriquecen mi práctica profesional.</p>
+    <div class="training-grid stagger-children">
+      <div class="training-item reveal"><span class="training-icon">📋</span><span class="training-text" data-i18n="tr.1">Actuaciones con menores infractores y sus conductas delictivas</span></div>
+      <div class="training-item reveal"><span class="training-icon">🔍</span><span class="training-text" data-i18n="tr.2">Características y tratamiento de agresores sexuales, de género y psicópatas</span></div>
+      <div class="training-item reveal"><span class="training-icon">💼</span><span class="training-text" data-i18n="tr.3">Competencias para la empleabilidad en Psicología</span></div>
+      <div class="training-item reveal"><span class="training-icon">📝</span><span class="training-text" data-i18n="tr.4">Normativa APA — Taller de elaboración de citas y referencias bibliográficas</span></div>
+      <div class="training-item reveal"><span class="training-icon">😰</span><span class="training-text" data-i18n="tr.5">Taller "Ansiedad ante exámenes" para alumnos de 2º Bachillerato (I.E.S Los Montecillos)</span></div>
+      <div class="training-item reveal"><span class="training-icon">📱</span><span class="training-text" data-i18n="tr.6">Jornada sobre salud y bienestar adolescente ante el uso de las TIC (Applied Positive Lab)</span></div>
+      <div class="training-item reveal"><span class="training-icon">🐕</span><span class="training-text" data-i18n="tr.7">Ponente en el workshop: "Terapia asistida con perros"</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="services">
+  <div class="container">
+    <p class="section-eyebrow reveal" data-i18n="sv.ey">Lo que puedo ofrecer</p>
+    <h2 class="section-title reveal" data-i18n="sv.t">Áreas de intervención</h2>
+    <p class="section-subtitle reveal" data-i18n="sv.st">Mi formación y experiencia me permiten acompañar a niños, adolescentes y familias en diferentes áreas.</p>
+    <div class="services-grid stagger-children">
+      <div class="service-card reveal"><div class="service-emoji">🧒</div><h3 data-i18n="s1.t">Atención Infantil Temprana</h3><p data-i18n="s1.d">Detección e intervención temprana en dificultades del desarrollo para potenciar el bienestar del niño desde los primeros años.</p></div>
+      <div class="service-card reveal"><div class="service-emoji">🧩</div><h3 data-i18n="s2.t">Dificultades del Aprendizaje</h3><p data-i18n="s2.d">Evaluación y apoyo en problemas de lectura, escritura, atención y otros desafíos que afectan el rendimiento escolar.</p></div>
+      <div class="service-card reveal"><div class="service-emoji">💭</div><h3 data-i18n="s3.t">Ansiedad y Gestión Emocional</h3><p data-i18n="s3.d">Herramientas y estrategias para que niños y adolescentes aprendan a identificar y gestionar sus emociones de forma saludable.</p></div>
+      <div class="service-card reveal"><div class="service-emoji">🐕</div><h3 data-i18n="s4.t">Terapia Asistida con Animales</h3><p data-i18n="s4.d">El vínculo con los animales como puente terapéutico para trabajar la empatía, la regulación emocional y las habilidades sociales.</p></div>
+      <div class="service-card reveal"><div class="service-emoji">👨‍👩‍👧</div><h3 data-i18n="s5.t">Orientación a Familias</h3><p data-i18n="s5.d">Acompañamiento a padres y madres con pautas y estrategias para mejorar la comunicación y el bienestar familiar.</p></div>
+      <div class="service-card reveal"><div class="service-emoji">🌟</div><h3 data-i18n="s6.t">Habilidades Sociales</h3><p data-i18n="s6.d">Programas y dinámicas para desarrollar competencias sociales, autoestima y resolución de conflictos en niños y adolescentes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HABILIDADES -->
+<section id="skills">
+  <div class="container">
+    <p class="section-eyebrow reveal" data-i18n="sk.ey">Habilidades</p>
+    <h2 class="section-title reveal" data-i18n="sk.t">Lo que me define</h2>
+    <p class="section-subtitle reveal" data-i18n="sk.st">Más allá de la formación, estas son las cualidades que aporto en cada interacción con niños y familias.</p>
+    <div class="skills-wrap stagger-children">
+      <span class="skill-bubble reveal" data-i18n="k1">Flexibilidad</span>
+      <span class="skill-bubble reveal" data-i18n="k2">Creatividad</span>
+      <span class="skill-bubble reveal" data-i18n="k3">Comunicación eficaz</span>
+      <span class="skill-bubble reveal" data-i18n="k4">Inteligencia emocional</span>
+      <span class="skill-bubble reveal" data-i18n="k5">Responsabilidad</span>
+      <span class="skill-bubble reveal" data-i18n="k6">Atención al detalle</span>
+      <span class="skill-bubble reveal" data-i18n="k7">Dinamismo y energía</span>
+      <span class="skill-bubble reveal" data-i18n="k8">Planificación y organización</span>
+      <span class="skill-bubble reveal" data-i18n="k9">Ética profesional</span>
+      <span class="skill-bubble reveal" data-i18n="k10">Inglés B2 (Cambridge)</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="section-eyebrow" data-i18n="ct.ey">Contacto</p>
+        <h2 class="contact-title" data-i18n="ct.t">¿Quieres saber más o tienes alguna <span class="highlight">consulta</span>?</h2>
+        <p class="contact-desc" data-i18n="ct.d">Estaré encantada de escucharte. Si tienes dudas sobre cómo puedo ayudar a tu hijo/a o simplemente quieres conocerme, no dudes en contactarme.</p>
+        <div class="contact-methods">
+          <a href="tel:+34655262360" class="contact-method"><span class="contact-method-icon">📞</span><div class="contact-method-info"><span class="contact-method-label" data-i18n="ct.ph">Teléfono</span><span class="contact-method-value">655 262 360</span></div></a>
+          <a href="mailto:laurajimenezmarmolejo03@gmail.com" class="contact-method"><span class="contact-method-icon">✉️</span><div class="contact-method-info"><span class="contact-method-label">Email</span><span class="contact-method-value">laurajimenezmarmolejo03@gmail.com</span></div></a>
+          <a href="#" class="contact-method"><span class="contact-method-icon">📍</span><div class="contact-method-info"><span class="contact-method-label" data-i18n="ct.loc">Ubicación</span><span class="contact-method-value">C. Antequera, 29 — Coín, Málaga</span></div></a>
+        </div>
+      </div>
+      <div class="contact-warmth reveal">
+        <div class="warmth-emoji">🤗</div>
+        <h3 class="warmth-title" data-i18n="w.t">Tu hijo/a está en buenas manos</h3>
+        <p class="warmth-text" data-i18n="w.d">Como profesional comprometida con la infancia, me importa que cada familia se sienta tranquila y acompañada en todo el proceso.</p>
+        <ul class="warmth-checklist">
+          <li><span class="warmth-check">✓</span><span data-i18n="w.1">Formación universitaria especializada</span></li>
+          <li><span class="warmth-check">✓</span><span data-i18n="w.2">Experiencia directa con niños y adolescentes</span></li>
+          <li><span class="warmth-check">✓</span><span data-i18n="w.3">Enfoque basado en la evidencia científica</span></li>
+          <li><span class="warmth-check">✓</span><span data-i18n="w.4">Trato cercano, respetuoso y empático</span></li>
+          <li><span class="warmth-check">✓</span><span data-i18n="w.5">Comunicación continua con las familias</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy" data-i18n="f.c">© 2026 Laura Jiménez Marmolejo — Psicóloga</p>
+  <p class="footer-made" data-i18n="f.m">Hecho con 💕 desde Coín, Málaga</p>
+</footer>
+
+<script>
+// Reveal
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})})});
+
+// Hamburger menu
+function toggleMenu(){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.querySelector('.hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('active');
+  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+}
+function closeMenu(){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.querySelector('.hamburger');
+  menu.classList.remove('open');
+  btn.classList.remove('active');
+  document.body.style.overflow='';
+}
+
+// Translation
+let lang='es';const orig=new Map();
+const T={
+  'lang.label':'Español','nav.about':'About me','nav.experience':'Experience','nav.education':'Education','nav.services':'Services','nav.contact':'Contact',
+  'hero.badge':'Child & Adolescent Psychologist','hero.title':'Supporting the <span class="highlight">little ones</span> on their journey','hero.text':"I'm Laura, a psychology graduate specialising in childhood and adolescence. I believe in warm, empathetic, evidence-based care where every child feels safe to grow.",'hero.cta1':'Get in touch ♥','hero.cta2':'Get to know me',
+  'h.1v':'Psychologist','h.1l':'University of Málaga','h.2l':'Clinical Health','h.3v':'Specialist','h.3l':'Child & Adolescent',
+  'c.1':'Energy','c.2':'Warmth','c.3':'Empathy','c.4':'Trust','c.5':'Ethics','c.6':'Professionalism',
+  'ab.ey':'About me','ab.t':'Every child deserves to be heard and understood',
+  'ab.p1':'I\'m <strong>Laura Jiménez Marmolejo</strong>, a Psychology graduate from the <strong>University of Málaga</strong>, currently pursuing a Master\'s in Child and Adolescent Psychology Intervention at <strong>Loyola University</strong>.',
+  'ab.p2':'During my training I had the opportunity to do placements at summer camps, early childhood centres (C.A.I.T.) and psychology clinics. These experiences taught me that <strong>supporting children with closeness, empathy and play</strong> makes all the difference.',
+  'ab.p3':'Since 2022 I have been volunteering in <strong>dog-assisted psychological therapy</strong> at the Huellas Terapéuticas Association, showing me first-hand the power of the animal-child bond.',
+  'ab.q':'"My goal is to provide comprehensive psychological care, based on scientific evidence and tailored to each patient\'s needs."',
+  'ex.ey':'Experience','ex.t':'Learning at every step','ex.st':'Every experience has taught me something valuable about working with children, adolescents and families.',
+  'e1.t':'Volunteer in dog-assisted therapy 🐾','e1.d':'Active participation in animal-assisted therapy sessions, working with children and adolescents in a unique therapeutic environment.','e1.g':'Active volunteer',
+  'e2.t':'Youth Monitor at Summer Camp','e2.d':'Organisation and facilitation of recreational and educational activities for children, promoting social skills, autonomy and teamwork.',
+  'e3.t':'Early Childhood Intervention Placement','e3.d':'Placement at a centre specialising in early intervention, collaborating in assessment and intervention with children and families.','e3.g':'Early Intervention',
+  'e4.t':'Children\'s Camp Monitor','e4.d':'Summer Camp 2024, Winter & Easter 2025. Planning activities adapted to different ages, focusing on play as a learning tool.',
+  'e5.t':'Retail Assistant — Primark','e5.d':'Customer service, inventory management and teamwork in a dynamic, high-volume environment.',
+  'e6.t':'Sales Assistant','e6.d':'Customer-facing retail experience, strengthening interpersonal skills and time management.',
+  'e7.t':'Cosmetics Promoter','e7.d':'Premium product promotion with personalised customer service and persuasive communication.',
+  'ed.ey':'Academic Education','ed.t':'Solid foundation, constant commitment','ed.st':'Rigorous training is the foundation of quality care.',
+  'ed.1':'Bachelor\'s in Psychology','ed.2':'MUPGS','ed.3':'Master\'s in Child & Adolescent Psychology Intervention',
+  'tr.ey':'Additional Training','tr.t':'Always learning','tr.st':'Courses, workshops and activities that enrich my professional practice.',
+  'tr.1':'Interventions with juvenile offenders and criminal behaviour','tr.2':'Characteristics and treatment of sexual and gender-based aggressors','tr.3':'Employability skills in Psychology','tr.4':'APA Standards — Citation and reference workshop','tr.5':'"Exam Anxiety" Workshop for Year 12 students','tr.6':'Conference on adolescent health and ICT use (Applied Positive Lab)','tr.7':'Speaker: "Dog-assisted therapy" workshop',
+  'sv.ey':'What I can offer','sv.t':'Areas of intervention','sv.st':'My training and experience allow me to support children, adolescents and families in different areas.',
+  's1.t':'Early Childhood Intervention','s1.d':'Early detection and intervention in developmental difficulties to enhance wellbeing from the earliest years.',
+  's2.t':'Learning Difficulties','s2.d':'Assessment and support for reading, writing, attention and other challenges affecting school performance.',
+  's3.t':'Anxiety & Emotional Management','s3.d':'Tools and strategies for children and adolescents to identify and manage their emotions in a healthy way.',
+  's4.t':'Animal-Assisted Therapy','s4.d':'The animal bond as a therapeutic bridge to work on empathy, emotional regulation and social skills.',
+  's5.t':'Family Guidance','s5.d':'Support for parents with guidelines and strategies to improve communication and family wellbeing.',
+  's6.t':'Social Skills','s6.d':'Programmes to develop social competences, self-esteem and conflict resolution in children and adolescents.',
+  'sk.ey':'Skills','sk.t':'What defines me','sk.st':'Beyond qualifications, these are the qualities I bring to every interaction with children and families.',
+  'k1':'Flexibility','k2':'Creativity','k3':'Effective communication','k4':'Emotional intelligence','k5':'Responsibility','k6':'Attention to detail','k7':'Dynamism & energy','k8':'Planning & organisation','k9':'Professional ethics','k10':'English B2 (Cambridge)',
+  'ct.ey':'Contact','ct.t':'Want to know more or have a <span class="highlight">question</span>?','ct.d':"I'd love to hear from you. If you have questions about how I can help your child or simply want to get to know me, don't hesitate to reach out.",'ct.ph':'Phone','ct.loc':'Location',
+  'w.t':'Your child is in good hands','w.d':'As a professional committed to childhood, I care that every family feels reassured and supported.',
+  'w.1':'Specialised university education','w.2':'Direct experience with children and adolescents','w.3':'Evidence-based approach','w.4':'Warm, respectful and empathetic care','w.5':'Ongoing communication with families',
+  'f.c':'© 2026 Laura Jiménez Marmolejo — Psychologist','f.m':'Made with 💕 from Coín, Málaga'
+};
+function apply(l){document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(!orig.has(el))orig.set(el,el.innerHTML);el.innerHTML=l==='en'&&T[k]?T[k]:orig.get(el)})}
+function toggleLang(){lang=lang==='es'?'en':'es';apply(lang);const f=document.querySelector('.lang-flag'),lb=document.querySelector('.lang-label');if(lang==='en'){f.textContent='🇪🇸';lb.textContent='Español'}else{f.textContent='🇬🇧';lb.textContent='English'}document.documentElement.lang=lang}
+</script>
+</body>
+</html>
